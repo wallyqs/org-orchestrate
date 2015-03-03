@@ -1,0 +1,100 @@
+#+TITLE:	Org Orchestrate
+#+startup:	showeverything
+
+Create nodes in AWS with Org mode (this is a proof of concept...)
+
+*** Usage
+
+For example having a document ~cloud.org~ like:
+
+#+BEGIN_SRC conf
+,#+title: Set up an Ubuntu 14.04 node in AWS
+
+,*** Credentials
+
+For connecting to AWS:
+
+,#+aws_access_key: your-aws-access-key
+,#+aws_secret_key: your-aws-secret-key
+,#+aws_region: us-east-1
+
+For executing blocks remotely via SSH:
+
+,#+sshidentityfile: keys/identity.pem
+
+,*** Example server
+
+,#+name:   create-ubuntu-14-04-node
+,#+header: :ami ami-408c7f28
+,#+header: :key_name aws-keyname
+,#+header: :instance_type t1.micro
+,#+header: :security_group sg-fddc2490
+,#+BEGIN_SRC sh :results output :user ubuntu
+sudo apt-get update
+echo "Done!"
+,#+END_SRC
+#+END_SRC
+
+Would describe how to spin up a single node in AWS with those details:
+
+#+BEGIN_SRC sh 
+org-orchestrate -f org/examples/cloud.org
+#+END_SRC
+
+Results:
+
+#+BEGIN_EXAMPLE
+2015/03/04 01:04:06.925130 [INF] Launching task: #+create-aws-instances
+2015/03/04 01:04:08.800207 [INF] Created instance: i-fa66b80a 
+2015/03/04 01:04:08.800236 [INF] Waiting 5 seconds before getting its state...
+2015/03/04 01:04:14.599716 [INF] Waiting 60 seconds for node to be ready...
+2015/03/04 01:05:15.177536 [INF] Connecting to instance i-fa66b80a running at 54.163.65.180...
+2015/03/04 01:05:39.319818 [INF] Command finished. Output:
+Ign http://us-east-1.ec2.archive.ubuntu.com trusty InRelease
+Ign http://us-east-1.ec2.archive.ubuntu.com trusty-updates InRelease
+Ign http://security.ubuntu.com trusty-security InRelease
+...
+Done!
+#+END_EXAMPLE
+
+# We can confirm in the AWS console:
+
+# TODO: Add screenshot
+
+*** Installation
+
+Via ~go get~:
+
+#+BEGIN_SRC sh 
+go get github.com/wallyqs/org-orchestrate
+#+END_SRC
+
+*** License
+
+#+BEGIN_SRC go :tangle src/github.com/wallyqs/org-orchestrate/org-orchestrate.go
+/**
+ *	(The MIT License)
+ *
+ *  Copyright (c) 2015 Waldemar Quevedo. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person
+ *  obtaining a copy of this software and associated documentation
+ *  files (the "Software"), to deal in the Software without
+ *  restriction, including without limitation the rights to use, copy,
+ *  modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+#+END_SRC

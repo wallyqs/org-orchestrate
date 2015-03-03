@@ -1,0 +1,53 @@
+#+TITLE:     Required repos
+#+startup:   showeverything
+
+*** Go amz repo
+
+#+name: git-clone-mitchellh-repos
+#+BEGIN_SRC sh
+
+mkdir -p  src/github.com/mitchellh
+cd        src/github.com/mitchellh
+git clone https://github.com/mitchellh/copystructure
+git clone https://github.com/mitchellh/mapstructure
+git clone https://github.com/mitchellh/reflectwalk
+git clone https://github.com/mitchellh/goamz
+
+# for the ssh helper
+git clone https://github.com/mitchellh/go-homedir
+#+END_SRC
+
+**** Go amz dependencies
+
+#+name: git-clone-goamz-deps
+#+BEGIN_SRC sh
+mkdir -p src/github.com/vaughan0
+cd       src/github.com/vaughan0
+
+git clone https://github.com/vaughan0/go-ini
+#+END_SRC
+
+And another Google repo for the ssh connection
+
+#+name: hg-clone-google-repo
+#+BEGIN_SRC sh
+mkdir -p src/code.google.com/p/
+cd       src/code.google.com/p/
+hg clone https://code.google.com/p/go.crypto/
+#+END_SRC
+
+*** Org mode for Go parser
+
+#+name: git-clone-org-mode
+#+BEGIN_SRC sh
+mkdir -p src/github.com/wallyqs/
+git clone https://github.com/wallyqs/org-go src/github.com/wallyqs/org-go
+#+END_SRC
+
+*** Logger from gnatsd
+
+#+name: git-clone-gnatsd-logger
+#+BEGIN_SRC sh
+mkdir -p src/github.com/apcera/
+git clone https://github.com/apcera/gnatsd src/github.com/apcera/gnatsd
+#+END_SRC

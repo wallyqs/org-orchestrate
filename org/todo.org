@@ -1,0 +1,15 @@
+#+title:	Progress
+#+startup:	showeverything
+
+*** 0.0.1
+
+- Basic prototype of the functionality
+  + create node on aws
+  + ssh an script
+  + run the script
+
+*** TODO [0/2] Pending
+
+- [ ] Buffered output of the results from the script
+- [ ] Persist the state of a node in the case of AWS
+# - [ ] Reinvent the wheel  

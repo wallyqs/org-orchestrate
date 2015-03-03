@@ -1,0 +1,25 @@
+#+TITLE: Example Org Cloud
+#+startup: showeverything
+
+For making calls to AWS:
+
+#+aws_access_key: your-aws-access-key
+#+aws_secret_key: your-aws-secret-key
+#+aws_region: us-east-1
+
+For the ssh session:
+
+#+sshidentityfile: keys/identity.pem
+
+*** Example server
+
+#+name:   create-aws-instances
+#+header: :ami ami-408c7f28
+#+header: :key_name aws-keyname
+#+header: :instance_type t1.micro
+#+header: :security_group sg-fddc2490
+#+header: :user ubuntu
+#+BEGIN_SRC sh
+sudo apt-get update
+echo "Done!"
+#+END_SRC
